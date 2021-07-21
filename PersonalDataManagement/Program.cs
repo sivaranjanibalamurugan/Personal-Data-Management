@@ -14,6 +14,7 @@ namespace PersonalDataManagement
             RetrieveTopTwoLessThanSixty(list);
             FindTenageRecord(list);
             FindingOutAverage(list);
+            SearchSpecificName(list, "siva");
             Console.ReadLine();
 
 
@@ -61,9 +62,23 @@ namespace PersonalDataManagement
              Console.WriteLine(" ");
             var result = list.Average(x => x.Age);
             Console.WriteLine("Average = {0}",result);
-            
+          
+        }
+
+        //UC5 check for specific name 
+        public static void SearchSpecificName(List<Person> list,string name)
+        {
+            Console.WriteLine(" ");
+            var person = list.Find(x => x.Name.Equals(name));
+            if (person != null)
+                Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
+            else
+                Console.WriteLine("{0} is not exists", name);
 
         }
+
+
+
 
 
 
