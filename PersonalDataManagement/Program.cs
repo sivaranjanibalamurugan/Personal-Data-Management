@@ -12,6 +12,8 @@ namespace PersonalDataManagement
             List<Person> list = new List<Person>();
             AddingPersonDetails(list);
             RetrieveTopTwoLessThanSixty(list);
+            FindTenageRecord(list);
+            FindingOutAverage(list);
             Console.ReadLine();
 
 
@@ -41,6 +43,30 @@ namespace PersonalDataManagement
                 Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
             }
         }
+
+        //UC3 - return between 13 to 18 
+        public static void FindTenageRecord(List<Person> list)
+        {
+            Console.WriteLine(" ");
+            var result = list.FindAll(p => p.Age > 13 && p.Age < 18);
+            foreach (Person person in result)
+            {
+                Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
+            }
+
+        }
+        //UC4 finding the average of age
+        public static void FindingOutAverage (List<Person> list)
+        { 
+             Console.WriteLine(" ");
+            var result = list.Average(x => x.Age);
+            Console.WriteLine("Average = {0}",result);
+            
+
+        }
+
+
+
 
     }
 }
