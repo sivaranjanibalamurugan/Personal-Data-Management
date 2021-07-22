@@ -100,6 +100,16 @@ namespace PersonalDataManagement
                 Console.WriteLine(ex.Message);
             }
         }
+        //UC 7 Remove the person record
+        public static void RemoveSpecificName(List<Person> list, string name)
+        {
+            Person result = SearchSpecificName(list, name);
+            if (result!= null)
+            {
+                if (list.Remove(result))
+                    Console.WriteLine("Successfully removed");
+            }
+        }
     }
 }
 
