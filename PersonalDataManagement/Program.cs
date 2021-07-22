@@ -41,7 +41,7 @@ namespace PersonalDataManagement
         public static void RetrieveTopTwoLessThanSixty(List<Person> list)
         {
             Console.WriteLine(" ");
-            List<Person> result = list.FindAll(p=>p.Age<60).OrderBy(x =>x.Age).Take(2).ToList();
+            List<Person> result = list.FindAll(p => p.Age < 60).OrderBy(x => x.Age).Take(2).ToList();
             Iterate(result);
         }
 
@@ -53,16 +53,16 @@ namespace PersonalDataManagement
             Iterate(result);
         }
         //UC4 finding the average of age
-        public static void FindingOutAverage (List<Person> list)
-        { 
-             Console.WriteLine(" ");
+        public static void FindingOutAverage(List<Person> list)
+        {
+            Console.WriteLine(" ");
             var result = list.Average(x => x.Age);
-            Console.WriteLine("Average = {0}",result);
-          
+            Console.WriteLine("Average = {0}", result);
+
         }
 
         //UC5 check for specific name 
-        public static void SearchSpecificName(List<Person> list,string name)
+        public static void SearchSpecificName(List<Person> list, string name)
         {
             try
             {
@@ -73,19 +73,19 @@ namespace PersonalDataManagement
                 else
                     Console.WriteLine("{0} is not exists", name);
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
         //UC6 skip records
-        public static void SkipRecordAgeLessThan60(List<Person>list)
+        public static void SkipRecordAgeLessThan60(List<Person> list)
         {
-            try 
+            try
             {
                 Console.WriteLine("");
                 List<Person> person = list.FindAll(x => x.Age > 60);
@@ -104,7 +104,7 @@ namespace PersonalDataManagement
         public static void RemoveSpecificName(List<Person> list, string name)
         {
             Person result = SearchSpecificName(list, name);
-            if (result!= null)
+            if (result != null)
             {
                 if (list.Remove(result))
                     Console.WriteLine("Successfully removed");
@@ -112,5 +112,6 @@ namespace PersonalDataManagement
         }
     }
 }
+
 
 
