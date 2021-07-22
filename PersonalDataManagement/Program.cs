@@ -15,6 +15,7 @@ namespace PersonalDataManagement
             FindTenageRecord(list);
             FindingOutAverage(list);
             SearchSpecificName(list, "siva");
+            SkipRecordAgeLessThan60(list);
             Console.ReadLine();
 
 
@@ -22,11 +23,14 @@ namespace PersonalDataManagement
         //UC1 adding the details 
         public static void AddingPersonDetails(List<Person> list)
         {
-            list.Add(new Person() { SSN = 1, Name = "siva",    Age = 72, Address = "Bangaluru",  });
+            list.Add(new Person() { SSN = 1, Name = "siva", Age = 72, Address = "Bangaluru", });
             list.Add(new Person() { SSN = 2, Name = "Ranjani", Age = 14, Address = "kerela", });
-            list.Add(new Person() { SSN = 3, Name = "bala",    Age = 18, Address = "madurai",  });
-            list.Add(new Person() { SSN = 4, Name = "karthi",  Age = 65, Address = "chennai", });
-
+            list.Add(new Person() { SSN = 3, Name = "bala", Age = 18, Address = "madurai", });
+            list.Add(new Person() { SSN = 4, Name = "karthi", Age = 65, Address = "chennai", });
+            Iterate(list);
+        }
+        public static void Iterate(List<Person> list)
+        {
             foreach (Person person in list)
             {
                 Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
@@ -38,11 +42,7 @@ namespace PersonalDataManagement
         {
             Console.WriteLine(" ");
             List<Person> result = list.FindAll(p=>p.Age<60).OrderBy(x =>x.Age).Take(2).ToList();
-
-            foreach (Person person in result)
-            {
-                Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
-            }
+            Iterate(result);
         }
 
         //UC3 - return between 13 to 18 
@@ -50,11 +50,7 @@ namespace PersonalDataManagement
         {
             Console.WriteLine(" ");
             var result = list.FindAll(p => p.Age > 13 && p.Age < 18);
-            foreach (Person person in result)
-            {
-                Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
-            }
-
+            Iterate(result);
         }
         //UC4 finding the average of age
         public static void FindingOutAverage (List<Person> list)
@@ -68,21 +64,42 @@ namespace PersonalDataManagement
         //UC5 check for specific name 
         public static void SearchSpecificName(List<Person> list,string name)
         {
-            Console.WriteLine(" ");
-            var person = list.Find(x => x.Name.Equals(name));
-            if (person != null)
-                Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
-            else
-                Console.WriteLine("{0} is not exists", name);
-
+            try
+            {
+                Console.WriteLine(" ");
+                var person = list.Find(x => x.Name.Equals(name));
+                if (person != null)
+                    Console.WriteLine("SSN = {0}\tName={1}\tAddress = {2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
+                else
+                    Console.WriteLine("{0} is not exists", name);
+            }
+            catch(NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
-
-
-
-
-
-
-
+        //UC6 skip records
+        public static void SkipRecordAgeLessThan60(List<Person>list)
+        {
+            try 
+            {
+                Console.WriteLine("");
+                List<Person> person = list.FindAll(x => x.Age > 60);
+                Iterate(person);
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
 
